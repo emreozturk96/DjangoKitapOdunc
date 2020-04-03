@@ -1,0 +1,33 @@
+{% extends "homebase.html" %}
+
+{% block title %} İletişim {% endblock %}
+{% block keywords %} {{ settings.keywords }} {% endblock %}
+{% block description %} {{ settings.description }} {% endblock %}
+
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ settings.icon.url }}'/> {% endblock %}
+
+
+{% block content %}
+
+    <div id="mainBody">
+        <div class="container">
+
+            <h1>İletişim</h1>
+            <hr class="soften"/>
+
+            <div class="accordion" id="accordion2">
+                <div class="accordion-group">
+                        <div class="accordion-inner">
+                            {{ settings.contactus | safe }}
+                        </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- MainBody End ============================= -->
+
+
+{% endblock %}
+
