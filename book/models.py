@@ -26,22 +26,23 @@ class Category(models.Model):
     def __str__(self):
         return self.title
 
+
 class Book(models.Model):
     STATUS = (
         ('True', 'Evet'),
         ('False', 'Hayır'),
     )
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    title = models.CharField(max_length=80)
-    keywords = models.CharField(max_length=255)
+    title = models.CharField(max_length=150)
+    keywords = models.CharField(blank=True, max_length=255)
     author = models.CharField(max_length=150)
     publisher = models.CharField(max_length=150)
-    publishDate = models.IntegerField()
-    totalPage = models.IntegerField()
-    language = models.CharField(max_length=50)
+    publishDate = models.IntegerField(blank=True)
+    totalPage = models.IntegerField(blank=True)
+    language = models.CharField(blank=True, max_length=50)
     image = models.ImageField(blank=True, upload_to='images/')
-    amount = models.IntegerField()
-    detail = RichTextUploadingField()
+    amount = models.IntegerField(blank=True)
+    detail = RichTextUploadingField(blank=True)
     status = models.CharField(max_length=10, choices=STATUS)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)

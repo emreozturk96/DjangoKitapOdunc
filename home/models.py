@@ -68,3 +68,19 @@ class ContactForm(ModelForm):
             'subject': TextInput(attrs={'class': 'input-xlarge', 'placeholder': 'Subject'}),
             'message': Textarea(attrs={'class': 'input-xlarge', 'placeholder': 'Your Message', 'rows': '5'}),
         }
+
+
+class Slider(models.Model):
+    STATUS = (
+        ('True', 'Evet'),
+        ('False', 'Hayır'),
+    )
+    title = models.CharField(max_length=150)
+    description = RichTextUploadingField(blank=True)
+    image = models.ImageField(blank=True, upload_to='images/')
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
+

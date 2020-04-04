@@ -3,12 +3,14 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
-from home.models import Setting, ContactForm, ContactFormMessage
+from home.models import Setting, ContactForm, ContactFormMessage, Slider
 
 
 def index(request):
     settings = Setting.objects.get(pk=1)
-    context = {'settings': settings}
+    sliderdata = Slider.objects.all()[1:4]
+    sliderfirst = Slider.objects.first()
+    context = {'settings': settings, 'sliderdata': sliderdata, 'sliderfirst': sliderfirst}
     return render(request, 'index.html', context)
     # return HttpResponse(" Deneme Sayfası %s." % text)
 
