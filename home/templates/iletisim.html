@@ -7,27 +7,47 @@
 {% block head %}
     <link rel='shortcut icon' type='image/x-icon' href='{{ settings.icon.url }}'/> {% endblock %}
 
-
 {% block content %}
-
     <div id="mainBody">
         <div class="container">
-
-            <h1>İletişim</h1>
+            <h1>İLETİŞİM</h1>
             <hr class="soften"/>
+            <div class="row">
+                <div class="span8">
+                    <h4>İletişim Bilgilerimiz</h4>
+                    {{ settings.contactus | safe }}
 
-            <div class="accordion" id="accordion2">
-                <div class="accordion-group">
-                        <div class="accordion-inner">
-                            {{ settings.contactus | safe }}
-                        </div>
                 </div>
 
+
+                <div class="span4" style="background-color: rgba(251,251,251,100)">
+                    <h4>İletişim Formu</h4>
+
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <input type="submit" value="SEND FORM">
+                    </form>
+
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="span12">
+                    {{ settings.haritaframe | safe }}
+                </div>
             </div>
         </div>
     </div>
     <!-- MainBody End ============================= -->
-
 
 {% endblock %}
 
