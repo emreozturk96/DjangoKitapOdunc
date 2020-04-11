@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
-from book.models import Category
+from book.models import Category, Book
 from home.models import Setting, ContactForm, ContactFormMessage, Slider
 
 
@@ -46,3 +46,11 @@ def iletisim(request):
     form = ContactForm()
     context = {'settings': settings, 'form': form}
     return render(request, 'iletisim.html', context)
+
+
+def category_books(request, id, slug):
+    books = Book.objects.filter(category_id=id)
+    category = Category.objects.all()
+    categorydata = Category.objects.get(pk=id)
+    context = {'books': books, "category": category, "categorydata": categorydata}
+    return render(request, 'books.html', context)

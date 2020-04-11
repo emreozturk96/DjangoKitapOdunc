@@ -12,7 +12,7 @@
 
         {% load mptt_tags %}
             {% recursetree category %}
-                <li {% if not node.is_leaf_node %}class="subMenu"{% endif %}><a href="/category/{{ node.slug }}">{% if node.is_leaf_node %}<i class="icon-chevron-right"></i>{% endif %} {{ node.title }} </a>
+                <li {% if not node.is_leaf_node %}class="subMenu"{% endif %}><a href="/category/{{ node.id }}/{{ node.slug }}">{% if node.is_leaf_node %}<i class="icon-chevron-right"></i>{% endif %} {{ node.title }} </a>
 
                     {% if not node.is_leaf_node %}
                         <ul >
