@@ -12,7 +12,8 @@ def index(request):
     sliderdata = Slider.objects.all()[1:4]
     sliderfirst = Slider.objects.first()
     category = Category.objects.all()
-    context = {'settings': settings, 'sliderdata': sliderdata, 'sliderfirst': sliderfirst, "category": category}
+    books = Book.objects.all().order_by('?')[:9]
+    context = {'settings': settings, 'sliderdata': sliderdata, 'sliderfirst': sliderfirst, "category": category, "books": books}
     return render(request, 'index.html', context)
     # return HttpResponse(" Deneme Sayfası %s." % text)
 

@@ -6,135 +6,23 @@
             {% block sidebar %} {% include "sidebar.html" %} {% endblock %}
             <!-- Sidebar end=============================================== -->
             <ul class="thumbnails">
-                <li class="span3">
-                    <div class="thumbnail">
-                        <a href="product_details.html"><img src="{% static 'themes/images/products/6.jpg' %}" alt=""/></a>
-                        <div class="caption">
-                            <h5>Product name</h5>
-                            <p>
-                                Lorem Ipsum is simply dummy text.
-                            </p>
 
-                            <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i
-                                    class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i
-                                    class="icon-shopping-cart"></i></a></h4>
+                {% for rs in books %}
+                    <li class="span3">
+                        <div class="thumbnail" >
+                            <a href="/book/{{ rs.id }}/{{ rs.slug }}"><img src="{{ rs.image.url }}"  alt=""/></a>
+                            <div class="caption">
+                                <h5>{{ rs.title }}</h5>
+
+                                <h4 style="text-align:center">
+                                    <a class="btn" href="/book/{{ rs.id }}/{{ rs.slug }}"> <i class="icon-zoom-in"></i>Detay</a>
+                                    <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a></h4>
+                            </div>
                         </div>
-                    </div>
-                </li>
-                <li class="span3">
-                    <div class="thumbnail">
-                        <a href="product_details.html"><img src="{% static 'themes/images/products/7.jpg' %}" alt=""/></a>
-                        <div class="caption">
-                            <h5>Product name</h5>
-                            <p>
-                                Lorem Ipsum is simply dummy text.
-                            </p>
-                            <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i
-                                    class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i
-                                    class="icon-shopping-cart"></i></a></h4>
-                        </div>
-                    </div>
-                </li>
-                <li class="span3">
-                    <div class="thumbnail">
-                        <a href="product_details.html"><img src="{% static 'themes/images/products/8.jpg' %}" alt=""/></a>
-                        <div class="caption">
-                            <h5>Product name</h5>
-                            <p>
-                                Lorem Ipsum is simply dummy text.
-                            </p>
-                            <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i
-                                    class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i
-                                    class="icon-shopping-cart"></i></a></h4>
-                        </div>
-                    </div>
-                </li>
-                <li class="span3">
-                    <div class="thumbnail">
-                        <a href="product_details.html"><img src="{% static 'themes/images/products/9.jpg' %}" alt=""/></a>
-                        <div class="caption">
-                            <h5>Product name</h5>
-                            <p>
-                                Lorem Ipsum is simply dummy text.
-                            </p>
-                            <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i
-                                    class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i
-                                    class="icon-shopping-cart"></i></a></h4>
-                        </div>
-                    </div>
-                </li>
-                <li class="span3">
-                    <div class="thumbnail">
-                        <a href="product_details.html"><img src="{% static 'themes/images/products/10.jpg' %}" alt=""/></a>
-                        <div class="caption">
-                            <h5>Product name</h5>
-                            <p>
-                                Lorem Ipsum is simply dummy text.
-                            </p>
-                            <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i
-                                    class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i
-                                    class="icon-shopping-cart"></i></a></h4>
-                        </div>
-                    </div>
-                </li>
-                <li class="span3">
-                    <div class="thumbnail">
-                        <a href="product_details.html"><img src="{% static 'themes/images/products/11.jpg' %}" alt=""/></a>
-                        <div class="caption">
-                            <h5>Product name</h5>
-                            <p>
-                                Lorem Ipsum is simply dummy text.
-                            </p>
-                            <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i
-                                    class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i
-                                    class="icon-shopping-cart"></i></a></h4>
-                        </div>
-                    </div>
-                </li>
-                <li class="span3">
-                    <div class="thumbnail">
-                        <a href="product_details.html"><img src="{% static 'themes/images/products/10.jpg' %}" alt=""/></a>
-                        <div class="caption">
-                            <h5>Product name</h5>
-                            <p>
-                                Lorem Ipsum is simply dummy text.
-                            </p>
-                            <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i
-                                    class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i
-                                    class="icon-shopping-cart"></i></a></h4>
-                        </div>
-                    </div>
-                </li>
-                <li class="span3">
-                    <div class="thumbnail">
-                        <a href="product_details.html"><img src="{% static 'themes/images/products/11.jpg' %}" alt=""/></a>
-                        <div class="caption">
-                            <h5>Product name</h5>
-                            <p>
-                                Lorem Ipsum is simply dummy text.
-                            </p>
-                            <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i
-                                    class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i
-                                    class="icon-shopping-cart"></i></a></h4>
-                        </div>
-                    </div>
-                </li>
-                <li class="span3">
-                    <div class="thumbnail">
-                        <a href="product_details.html"><img src="{% static 'themes/images/products/10.jpg' %}" alt=""/></a>
-                        <div class="caption">
-                            <h5>Product name</h5>
-                            <p>
-                                Lorem Ipsum is simply dummy text.
-                            </p>
-                            <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i
-                                    class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i
-                                    class="icon-shopping-cart"></i></a></h4>
-                        </div>
-                    </div>
-                </li>
+                    </li>
+                {% endfor %}
+
             </ul>
-
         </div>
     </div>
 </div>
