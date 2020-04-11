@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
+from book.models import Category
 from home.models import Setting, ContactForm, ContactFormMessage, Slider
 
 
@@ -10,7 +11,8 @@ def index(request):
     settings = Setting.objects.get(pk=1)
     sliderdata = Slider.objects.all()[1:4]
     sliderfirst = Slider.objects.first()
-    context = {'settings': settings, 'sliderdata': sliderdata, 'sliderfirst': sliderfirst}
+    category = Category.objects.all()
+    context = {'settings': settings, 'sliderdata': sliderdata, 'sliderfirst': sliderfirst, "category": category}
     return render(request, 'index.html', context)
     # return HttpResponse(" Deneme Sayfası %s." % text)
 
