@@ -1,0 +1,140 @@
+{% extends "homebase.html" %}
+
+{% block title %} {{ book.title }} {% endblock %}
+{% block keywords %} {{ book.keywords }} {% endblock %}
+{% block description %} {{ settings.description }} {% endblock %}
+
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ settings.icon.url }}'/> {% endblock %}
+
+
+{% block content %}
+
+    <div id="mainBody">
+        <div class="container">
+            <div class="row">
+                <!-- Sidebar ================================================== -->
+                {% block sidebar %} {% include "sidebar.html" %} {% endblock %}
+                <!-- Sidebar end=============================================== -->
+
+                <div class="span9">
+                    <ul class="breadcrumb">
+                        <li><a href="/">Anasayfa</a> <span class="divider">/</span></li>
+                        <li><a href="products.html">Books</a> <span class="divider">/</span></li>
+                        <li><a href="/category/{{ category.id }}/{{ category.slug }}">{{ book.category }}</a> <span
+                                class="divider">/</span></li>
+                        <li class="active">{{ book.title }}</li>
+                    </ul>
+
+
+                    <div class="row">
+                        <div id="gallery" class="span3">
+
+                            <a href="{{ book.image.url }}" title="{{ book.title }}"><img src="{{ book.image.url }}"
+                                                                                         style="width:100%"
+                                                                                         alt="{{ book.title }}"/></a>
+
+                            <div id="differentview" class="moreOptopm carousel slide">
+                                <div class="carousel-inner">
+                                    <div class="item active">
+                                        {% for rs in images %}
+                                            <a href="{{ rs.image.url }}"> <img style="width:29%" src="{{ rs.image.url }}" alt=""/></a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            {% comment %}<div class="btn-toolbar">
+                                <div class="btn-group">
+                                    <span class="btn"><i class="icon-envelope"></i></span>
+                                    <span class="btn"><i class="icon-print"></i></span>
+                                    <span class="btn"><i class="icon-zoom-in"></i></span>
+                                    <span class="btn"><i class="icon-star"></i></span>
+                                    <span class="btn"><i class=" icon-thumbs-up"></i></span>
+                                    <span class="btn"><i class="icon-thumbs-down"></i></span>
+                                </div>
+                            </div>{% endcomment %}
+                        </div>
+                        <div class="span6">
+                            <h3> {{ book.title }}</h3>
+                            <small><b>{{ book.author }} - {{ book.publisher }}</b></small>
+                            <hr class="soft"/>
+                            <form class="form-horizontal qtyFrm">
+                                <div class="control-group">
+                                    <label class="control-label"><span>{{ book.amount }} books in stock</span></label>
+                                    <div class="controls">
+                                        <button type="submit" class="btn btn-large btn-primary pull-right"> Add to cart
+                                            <i class=" icon-shopping-cart"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <hr class="soft clr"/>
+                            <p>
+                                {{ book.detail |safe | truncatewords:40}}
+
+                            </p>
+                            <a class="btn btn-small pull-right" href="#detail">More Details</a>
+                            <br class="clr"/>
+                            <a href="#" name="detail"></a>
+                            <hr class="soft"/>
+                        </div>
+
+                        <div class="span9">
+                            <ul id="productDetail" class="nav nav-tabs">
+                                <li class="active"><a href="#home" data-toggle="tab">Kitap Detayları</a></li>
+                                <li><a href="#profile" data-toggle="tab">Yorumlar</a></li>
+                            </ul>
+                            <div id="myTabContent" class="tab-content">
+                                <div class="tab-pane fade active in" id="home">
+                                    <h4>Kitap Bilgileri</h4>
+                                    {{ book.detail | safe }}
+                                </div>
+                                <div class="tab-pane fade" id="profile">
+
+                                    <div class="tab-content">
+                                        <div class="row">
+                                            <div class="span8">
+                                                <h4>Yorumlar</h4>
+
+
+                                            </div>
+
+
+                                            <div class="span4" style="background-color: rgba(251,251,251,100)">
+                                                <h4>Yorum Formu</h4>
+
+                                                {% if messages %}
+                                                    {% for message in messages %}
+                                                        <div class="alert alert-{{ message.tags }}" role="alert">
+                                                            {{ message }}
+                                                        </div>
+                                                    {% endfor %}
+                                                {% endif %}
+
+                                                <form action="" method="post">
+                                                    {% csrf_token %}
+                                                    {{ form.as_p }}
+                                                    <input type="submit" value="SEND FORM">
+                                                </form>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br class="clr">
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- MainBody End ============================= -->
+
+
+{% endblock %}
+
