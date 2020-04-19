@@ -4,6 +4,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from book.models import Category, Book, Images, Comment
+from home.forms import SearchForm
 from home.models import Setting, ContactForm, ContactFormMessage, Slider
 
 
@@ -67,3 +68,16 @@ def book_detail(request, id, slug):
     comments = Comment.objects.filter(book_id=id, status='True')
     context = {"category": category, "book": book, "images": images, "comments": comments}
     return render(request, 'book_detail.html', context)
+
+
+def book_search(request):
+    if request.method == 'POST':
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            category = Category.objects.all()
+            query = form.cleaned_data['query']
+            books = Book.objects.filter(title__icontains=query)
+            context = {"category": category, "books": books}
+            return render(request, 'book_search.html', context)
+
+    return HttpResponseRedirect('/')

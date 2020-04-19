@@ -1,5 +1,16 @@
-{% load static %}
-<div id="mainBody">
+{% extends "homebase.html" %}
+
+{% block title %} Hakkımızda-{{ settings.company }} {% endblock %}
+{% block keywords %} {{ settings.keywords }} {% endblock %}
+{% block description %} {{ settings.description }} {% endblock %}
+
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ settings.icon.url }}'/> {% endblock %}
+
+
+{% block content %}
+
+    <div id="mainBody">
     <div class="container">
         <div class="row">
             <!-- Sidebar ================================================== -->
@@ -26,4 +37,8 @@
         </div>
     </div>
 </div>
-</div>
+    <!-- MainBody End ============================= -->
+
+
+{% endblock %}
+
