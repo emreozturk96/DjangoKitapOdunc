@@ -5,19 +5,34 @@
     <div id="myCarousel" class="carousel slide">
         <div class="carousel-inner">
 
-
             <div class="item active">
-                <div class="container">
-                    <a href="register.html"><img style="width:100%" src="{{ sliderfirst.image.url }}" alt="special offers"/></a>
+                <div class="container" style="background-image: url('{{ sliderfirst.image.url }}')">
+                    <div class="span5"><a href="/book/{{ bookfirst.id }}/{{ bookfirst.slug }}" ><img style="height: 420px; padding: 30px;" src="{{ bookfirst.image.url }}" alt="{{ bookfirst.title }}"/></a></div>
+                    <div class="span6" style="height: 400px; padding-top: 30px; padding-bottom: 30px">
+                        <br/><br/><br/><br/>
+                        <h1>{{ bookfirst.title }}</h1>
+                        <br/>
+                        <h3>{{ bookfirst.author }}</h3>
+                        <br/><br/><br/><br/>
+                        <h6>Kütüphanemizde {{ bookfirst.amount }}  adet bulunmaktadır.</h6>
+                    </div>
                 </div>
             </div>
 
-            {% for rs in sliderdata %}
-            <div class="item">
-                <div class="container">
-                    <a href="/book/{{ rs.id }}/{{ rs.slug }}"><img style="width:100%" src="{{ rs.image.url }}" alt=""/></a>
+            {% for rs in bookslider %}
+                <div class="item" >
+                      <div class="container" style="background-image: url('{{ sliderfirst.image.url }}')">
+                       <div class="span5"><a href="/book/{{ rs.id }}/{{ rs.slug }}"><img style="height: 420px; padding: 30px;" src="{{ rs.image.url }}" alt="{{ rs.title }}"/></a></div>
+                    <div class="span6" style="height: 400px; padding-top: 30px; padding-bottom: 30px">
+                        <br/><br/><br/><br/>
+                        <h1>{{ rs.title }}</h1>
+                        <br/>
+                        <h3>{{ rs.author }}</h3>
+                        <br/><br/><br/><br/>
+                        <h6>Kütüphanemizde {{ rs.amount }}  adet bulunmaktadır.</h6>
+                    </div>
+                    </div>
                 </div>
-            </div>
             {% endfor %}
 
         </div>

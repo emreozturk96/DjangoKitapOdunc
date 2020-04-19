@@ -4,6 +4,8 @@ from django.db import models
 # Create your models here.
 from django.forms import ModelForm, TextInput, Textarea
 
+from book.models import Book
+
 
 class Setting(models.Model):
     STATUS = (
@@ -55,7 +57,7 @@ class ContactFormMessage(models.Model):
     update_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.name
+        return self.title
 
 
 class ContactForm(ModelForm):
@@ -75,9 +77,11 @@ class Slider(models.Model):
         ('True', 'Evet'),
         ('False', 'Hayır'),
     )
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, null=True, blank=True)
     title = models.CharField(max_length=150)
     description = RichTextUploadingField(blank=True)
     image = models.ImageField(blank=True, upload_to='images/')
+    status = models.CharField(max_length=10, choices=STATUS, default='False')
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 

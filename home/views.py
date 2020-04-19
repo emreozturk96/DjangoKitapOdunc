@@ -3,18 +3,19 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
-from book.models import Category, Book, Images
+from book.models import Category, Book, Images, Comment
 from home.models import Setting, ContactForm, ContactFormMessage, Slider
 
 
 def index(request):
     settings = Setting.objects.get(pk=1)
-    sliderdata = Slider.objects.all()[1:4]
     sliderfirst = Slider.objects.first()
     category = Category.objects.all()
     books = Book.objects.all().order_by('?')[:9]
-    context = {'settings': settings, 'sliderdata': sliderdata, 'sliderfirst': sliderfirst, "category": category,
-               "books": books}
+    bookfirst = Book.objects.first()
+    bookslider = Book.objects.all().order_by('id')[1:4]
+    context = {'settings': settings, 'bookfirst': bookfirst, 'sliderfirst': sliderfirst, "category": category,
+               "books": books, "bookslider": bookslider}
     return render(request, 'index.html', context)
     # return HttpResponse(" Deneme Sayfası %s." % text)
 
@@ -54,7 +55,8 @@ def category_books(request, id, slug):
     books = Book.objects.filter(category_id=id)
     category = Category.objects.all()
     categorydata = Category.objects.get(pk=id)
-    context = {'books': books, "category": category, "categorydata": categorydata}
+    bookfirst = Book.objects.first()
+    context = {'books': books, "category": category, "categorydata": categorydata, "bookfirst": bookfirst}
     return render(request, 'books.html', context)
 
 
@@ -62,5 +64,6 @@ def book_detail(request, id, slug):
     category = Category.objects.all()
     book = Book.objects.get(pk=id)
     images = Images.objects.filter(book_id=id)
-    context = {"category": category, "book": book, "images":images}
+    comments = Comment.objects.filter(book_id=id, status='True')
+    context = {"category": category, "book": book, "images": images, "comments": comments}
     return render(request, 'book_detail.html', context)

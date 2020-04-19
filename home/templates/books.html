@@ -13,12 +13,12 @@
     <div id="mainBody">
         <div class="container">
             <div class="row">
-                <!-- Sidebar ================================================== -->
+
                 {% block sidebar %} {% include "sidebar.html" %} {% endblock %}
-                <!-- Sidebar end=============================================== -->
+
                 <div class="span9">
                     <ul class="breadcrumb">
-                        <li><a href="index.html">Anasayfa</a> <span class="divider">/</span></li>
+                        <li><a href="/">Anasayfa</a> <span class="divider">/</span></li>
                         <li class="active">{{books.first.category}}</li>
                     </ul>
                     <h3> {{books.first.category}}  <small class="pull-right"> {{ books.count}} books are available </small></h3>
