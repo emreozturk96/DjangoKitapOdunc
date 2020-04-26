@@ -18,6 +18,7 @@ class CategoryAdmin2(DraggableMPTTAdmin):
     mptt_indent_field = "title"
     list_display = ('tree_actions', 'indented_title', 'related_products_count', 'related_products_cumulative_count')
     list_display_links = ('indented_title',)
+    prepopulated_fields = {'slug': ('title',)}
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
@@ -45,6 +46,7 @@ class BookAdmin(admin.ModelAdmin):
     readonly_fields = ('image_tag',)
     list_filter = ['category']
     inlines = [BookImagesInline]
+    prepopulated_fields = {'slug': ('title',)}
 
 
 class ImagesAdmin(admin.ModelAdmin):
