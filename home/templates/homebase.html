@@ -13,32 +13,42 @@
     <link id="callCss" rel="stylesheet" href="{% static 'themes/bootshop/bootstrap.min.css' %}" media="screen"/>
     <link href="{% static 'themes/css/base.css' %}" rel="stylesheet" media="screen"/>
     <!-- Bootstrap style responsive -->
-	<link href="{% static 'themes/css/bootstrap-responsive.min.css' %}" rel="stylesheet"/>
-	<link href="{% static 'themes/css/font-awesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'themes/css/bootstrap-responsive.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'themes/css/font-awesome.css' %}" rel="stylesheet" type="text/css">
     <!-- Google-code-prettify -->
-	<link href="{% static 'themes/js/google-code-prettify/prettify.css' %}" rel="stylesheet"/>
+    <link href="{% static 'themes/js/google-code-prettify/prettify.css' %}" rel="stylesheet"/>
     <!-- fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'themes/images/ico/apple-touch-icon-144-precomposed.png' %}">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'themes/images/ico/apple-touch-icon-114-precomposed.png' %}">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static 'themes/images/ico/apple-touch-icon-72-precomposed.png' %}">
-    <link rel="apple-touch-icon-precomposed" href="{% static 'themes/images/ico/apple-touch-icon-57-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144"
+          href="{% static 'themes/images/ico/apple-touch-icon-144-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114"
+          href="{% static 'themes/images/ico/apple-touch-icon-114-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72"
+          href="{% static 'themes/images/ico/apple-touch-icon-72-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed"
+          href="{% static 'themes/images/ico/apple-touch-icon-57-precomposed.png' %}">
 
     <!-- Custom stlylesheet -->
-	<link type="text/css" rel="stylesheet" href="{% static 'themes/css/style.css' %}" />
+    <link type="text/css" rel="stylesheet" href="{% static 'themes/css/style.css' %}"/>
+    <style type="text/css" id="enject"></style>
 
-	<style type="text/css" id="enject"></style>
+    <!-- jQuery !-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <!-- jQuery UI !-->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
     {% block head %} {% endblock %}
 </head>
 
 <body>
-    {% include 'header.html' %}
+{% include 'header.html' %}
 
-    {% block slider %} {% endblock %}
-    {% block content %} {% endblock %}
-    {% block body %} {% endblock %}
+{% block slider %} {% endblock %}
+{% block content %} {% endblock %}
+{% block body %} {% endblock %}
 
-    {% include 'footer.html' %}
-    {% block foot %} {% endblock %}
+{% include 'footer.html' %}
+{% block foot %} {% endblock %}
 </body>
 
 </html>

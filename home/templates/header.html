@@ -1,5 +1,20 @@
 {% load static %}
 
+<script>
+  $(function() {
+    $("#query").autocomplete({
+      source: "/search_auto/",
+      select: function (event, ui) { //item selected
+        AutoCompleteSelectHandler(event, ui)
+      },
+      minLength: 2,
+    });
+  });
+  function AutoCompleteSelectHandler(event, ui)
+  {
+    var selectedObj = ui.item;
+  }
+</script>
 
 <div id="header">
     <div class="container">
@@ -21,11 +36,13 @@
             </a>
             <div class="navbar-inner">
                 <a class="brand" href="/"><img src="{% static 'themes/images/logo.png' %}" alt="Bootsshop"/></a>
-                <form class="form-inline navbar-search" name="query" method="post" action="/search/">
+
+                <form class="form-inline navbar-search" method="post" action="/search/">
                     {% csrf_token %}
-                    <input class="srchTxt" name="query" type="text"/>
+                    <input class="srchTxt" id="query" name="query" type="text"/>
                     <button type="submit" id="submitButton" class="btn btn-primary">ARA</button>
                 </form>
+
                 <ul id="topMenu" class="nav pull-right">
                     <li class=""><a href="/">Anasayfa</a></li>
 					<li class=""><a href="#">Kitaplar</a></li>
