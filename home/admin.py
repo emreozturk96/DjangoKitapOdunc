@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 from book.models import Comment
-from home.models import Setting, ContactFormMessage, Slider
+from home.models import Setting, ContactFormMessage, Slider, UserProfile
 
 
 class ContactFormMessageAdmin(admin.ModelAdmin):
@@ -19,7 +19,12 @@ class CommentAdmin(admin.ModelAdmin):
     list_filter = ['status']
 
 
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = ['user_name', 'phone', 'city', 'image_tag']
+
+
 admin.site.register(Setting)
 admin.site.register(ContactFormMessage, ContactFormMessageAdmin)
 admin.site.register(Slider, SliderAdmin)
 admin.site.register(Comment, CommentAdmin)
+admin.site.register(UserProfile, UserProfileAdmin)
