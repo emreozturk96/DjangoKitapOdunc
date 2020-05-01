@@ -1,6 +1,6 @@
 {% extends "homebase.html" %}
 
-{% block title %} İletişim {% endblock %}
+{% block title %} Login {% endblock %}
 {% block keywords %} {{ settings.keywords }} {% endblock %}
 {% block description %} {{ settings.description }} {% endblock %}
 
@@ -32,7 +32,7 @@
                             <div class="control-group">
                                 <input type="password" id="password" name="password" placeholder="Password">
                             </div>
-                            
+
                             <div class="control-group">
                                 <div class="controls">
                                     <button type="submit" class="btn btn-info">Sign in</button>&nbsp;&nbsp;&nbsp;
@@ -40,6 +40,9 @@
                                 </div>
                             </div>
                         </form>
+                        <a href="/signup">
+                                <button class="btn block">Create Your Account</button>
+                            </a>
                     </div>
                 </div>
 
