@@ -33,6 +33,8 @@ urlpatterns = [
     path('book/<int:id>/<slug:slug>/', views.book_detail, name='book_detail'),
     path('search/', views.book_search, name='book_search'),
     path('search_auto/', views.book_search_auto, name='book_search_auto'),
+    path('logout/', views.logout_view, name='logout_view'),
+    path('login/', views.login_view, name='login_view'),
 ]
 
 if settings.DEBUG:  # new
