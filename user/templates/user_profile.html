@@ -1,0 +1,63 @@
+{% extends "homebase.html" %}
+
+{% block title %} User Panel {% endblock %}
+{% block keywords %} {{ settings.keywords }} {% endblock %}
+{% block description %} {{ settings.description }} {% endblock %}
+
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ settings.icon.url }}'/> {% endblock %}
+
+{% block content %}
+    <div id="mainBody">
+        <div class="container">
+            <hr class="soften"/>
+            <div class="row">
+                <div class="span4">
+                    <div class="well" style="padding: 8px 0;">
+                        <ul class="nav nav-list">
+                            <li><a href="/user"><i class="icon-user"></i> My Account</a></li>
+                            <li><a href="#"><i class="icon-shopping-cart"></i> My Orders</a></li>
+                            <li><a href="#"><i class="icon-pencil"></i> My Comments</a></li>
+                            <li><a href="#"><i class="icon-heart"></i> My Favorites</a></li>
+                            <li><a href="/logout"><i class="icon-lock"></i> LOGOUT</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="span8">
+                    <table class="table table-striped">
+                        <tr>
+                            <th ></th>
+                            <td ><img style="width: 200px" src="{{ profile.image.url }}"></td>
+                        </tr>
+                        <tr>
+                            <th class="span3">Name Surname :</th>
+                            <td class="span5">{{ profile.user.first_name }} {{ profile.user.last_name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Phone :</th>
+                            <td>{{ profile.phone }}</td>
+                        </tr>
+                        <tr>
+                            <th>Adres :</th>
+                            <td>{{ profile.address }}</td>
+                        </tr>
+                        <tr>
+                            <th>City :</th>
+                            <td>{{ profile.city }}</td>
+                        </tr>
+                        <tr>
+                            <th>Country :</th>
+                            <td>{{ profile.country }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+    <!-- MainBody End ============================= -->
+
+{% endblock %}
+
