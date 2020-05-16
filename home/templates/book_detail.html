@@ -60,13 +60,24 @@
                             </div>{% endcomment %}
                         </div>
                         <div class="span6">
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-{{ message.tags }}" role="alert">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
                             <h3> {{ book.title }}</h3>
                             <small><b>{{ book.author }} - {{ book.publisher }}</b></small>
                             <hr class="soft"/>
-                            <form class="form-horizontal qtyFrm">
+                            <form class="form-horizontal qtyFrm" action="/order/addtocard/{{ book.id }}" method="post">
+                                {% csrf_token %}
                                 <div class="control-group">
                                     <label class="control-label"><span>{{ book.amount }} books in stock</span></label>
-                                    <div class="controls">
+                                    <div>
+                                        <label class="control-label"> Kitap maximum 20 günlük ödünç alınabilir:</label>
+                                        <input type="number" name="day" id="id_day" value="1" min="1" max="20"
+                                               style="width: 35px">
                                         <button type="submit" class="btn btn-large btn-primary pull-right"> Add to cart
                                             <i class=" icon-shopping-cart"></i></button>
                                     </div>
@@ -103,8 +114,10 @@
                                                     {% for rs in comments %}
                                                         <div class="single-review">
                                                             <div class="review-heading">
-                                                                <div><i class="fa fa-user"></i>{{ rs.user.first_name }}</div>
-                                                                <div><i class="fa fa-clock-o"></i>{{ rs.create_at }}</div>
+                                                                <div><i class="fa fa-user"></i>{{ rs.user.first_name }}
+                                                                </div>
+                                                                <div><i class="fa fa-clock-o"></i>{{ rs.create_at }}
+                                                                </div>
                                                                 <div class="review-rating pull-right">
                                                                     <i class="fa fa-star{% if rs.rate < 1 %}-o empty{% endif %}"></i>
                                                                     <i class="fa fa-star{% if rs.rate < 2 %}-o empty{% endif %}"></i>

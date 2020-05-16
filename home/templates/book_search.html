@@ -11,32 +11,33 @@
 {% block content %}
 
     <div id="mainBody">
-    <div class="container">
-        <div class="row">
-            <!-- Sidebar ================================================== -->
-            {% block sidebar %} {% include "sidebar.html" %} {% endblock %}
-            <!-- Sidebar end=============================================== -->
-            <ul class="thumbnails">
+        <div class="container">
+            <div class="row">
+                <!-- Sidebar ================================================== -->
+                {% block sidebar %} {% include "sidebar.html" %} {% endblock %}
+                <!-- Sidebar end=============================================== -->
+                <ul class="thumbnails">
+                    {% for rs in books %}
+                        <li class="span3">
+                            <div class="thumbnail">
+                                <a href="/book/{{ rs.id }}/{{ rs.slug }}"><img src="{{ rs.image.url }}" alt=""/></a>
+                                <div class="caption">
+                                    <h5>{{ rs.title }}</h5>
 
-                {% for rs in books %}
-                    <li class="span3">
-                        <div class="thumbnail">
-                            <a href="/book/{{ rs.id }}/{{ rs.slug }}"><img src="{{ rs.image.url }}" alt=""/></a>
-                            <div class="caption">
-                                <h5>{{ rs.title }}</h5>
-
-                                <h4 style="text-align:center">
-                                    <a class="btn" href="/book/{{ rs.id }}/{{ rs.slug }}"> <i class="icon-zoom-in"></i>Detay</a>
-                                    <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a></h4>
+                                    <h4 style="text-align:center">
+                                        <a class="btn" href="/book/{{ rs.id }}/{{ rs.slug }}"> <i
+                                                class="icon-zoom-in"></i>Detay</a>
+                                        <a class="btn" href="/order/addtocard/{{ rs.id }}">Add to <i
+                                                class="icon-shopping-cart"></i></a></h4>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                {% endfor %}
+                        </li>
+                    {% endfor %}
 
-            </ul>
+                </ul>
+            </div>
         </div>
     </div>
-</div>
     <!-- MainBody End ============================= -->
 
 

@@ -65,7 +65,7 @@
                                     <form class="form-horizontal qtyFrm">
                                         <h3> Stok : {{ rs.amount }}</h3>
 
-                                        <a href="product_details.html" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
+                                        <a href="/order/addtocard/{{ rs.id }}" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
                                         <a href="/book/{{ rs.id }}/{{ rs.slug }}" class="btn btn-large"><i class="icon-zoom-in"></i>Detay</a>
 
                                     </form>
@@ -85,7 +85,7 @@
                                             <h5>{{ rs.title }}</h5>
                                             <h4 style="text-align:center">
                                                 <a class="btn" href="/book/{{ rs.id }}/{{ rs.slug }}"> <i class="icon-zoom-in"></i>Detay</a>
-                                                <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a>
+                                                <a class="btn" href="/order/addtocard/{{ rs.id }}">Add to <i class="icon-shopping-cart"></i></a>
                                                 <a class="btn btn-primary">Stok : {{rs.amount}}</a>
                                             </h4>
                                         </div>

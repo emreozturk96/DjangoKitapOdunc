@@ -18,6 +18,13 @@
 
 <div id="header">
     <div class="container">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
         <div id="welcomeLine" class="row">
             <div class="span6">
                 {% if user.id is not None %}

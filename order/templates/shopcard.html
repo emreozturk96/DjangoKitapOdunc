@@ -1,0 +1,64 @@
+{% extends "homebase.html" %}
+
+{% block title %} SHOPCARD {% endblock %}
+{% block keywords %} {{ settings.keywords }} {% endblock %}
+{% block description %} {{ settings.description }} {% endblock %}
+
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ settings.icon.url }}'/> {% endblock %}
+
+
+{% block content %}
+
+    <div id="mainBody">
+        <div class="container">
+
+            <h1>SHOPCARD</h1>
+            <hr class="soften"/>
+
+            <div class="accordion" id="accordion2">
+
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Book</th>
+                        <th>Description</th>
+                        <th>Gün/Update</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for rs in shopcardd %}
+                        <tr>
+                            <td><img width="60" src="{{ rs.book.image.url }}" alt=""/></td>
+                            <td>{{ rs.book.title }}<br/>{{ rs.book.author }}</td>
+                            <td>
+                                <div class="input-append">
+                                    <input class="span1" style="max-width:34px" value="{{ rs.day }}"
+                                           id="appendedInputButtons" size="16" type="text">
+                                    <button class="btn" type="button"><i class="icon-minus"></i></button>
+                                    <button class="btn" type="button"><i class="icon-plus"></i></button>
+                                    <a href="/order/deletefromcard/{{ rs.id }}" onclick="return confirm('Sepetten kaldırmak istediğinize emin misiniz ?')">
+                                        <button class="btn btn-danger" type="button"><i
+                                                class="icon-remove icon-white"></i></button>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    <tr>
+                        <td colspan="6" style="text-align:right"><strong>TOTAL ($228 - $50 + $31) =</strong></td>
+                        <td class="label label-important" style="display:block"><strong> $155.00 </strong></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <!-- MainBody End ============================= -->
+
+
+{% endblock %}
+
