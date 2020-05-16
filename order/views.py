@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
+from home.models import Setting
 from order.models import ShopCardForm, ShopCard
 
 
@@ -32,6 +33,7 @@ def addtocard(request, id):
                 data.book_id = id
                 data.day = form.cleaned_data['day']
                 data.save()
+                request.session['card_items'] = ShopCard.objects.filter(user_id=current_user.id).count()
                 messages.success(request, "Başarıyla sepete eklenmiştir.")
         return HttpResponseRedirect(url)
 
@@ -44,8 +46,10 @@ def addtocard(request, id):
             data.book_id = id
             data.day = 7
             data.save()
+            request.session['card_items'] = ShopCard.objects.filter(user_id=current_user.id).count()
             messages.success(request, "Başarıyla sepete eklenmiştir.")
-    return HttpResponseRedirect(url)
+        return HttpResponseRedirect(url)
+
 
     messages.warning(request, "Sepete Eklerken hata.")
     return HttpResponseRedirect(url)
@@ -54,13 +58,17 @@ def addtocard(request, id):
 @login_required(login_url='/login')
 def shopcard(request):
     current_user = request.user
+    settings = Setting.objects.get(pk=1)
     shopcardd = ShopCard.objects.filter(user_id=current_user.id)
-    context = {'shopcardd': shopcardd}
+    request.session['card_items'] = ShopCard.objects.filter(user_id=current_user.id).count()
+    context = {'shopcardd': shopcardd, 'settings': settings}
     return render(request, 'shopcard.html', context)
 
 
 @login_required(login_url='/login')
 def deletefromcard(request, id):
     ShopCard.objects.filter(id=id).delete()
+    current_user = request.user
+    request.session['card_items'] = ShopCard.objects.filter(user_id=current_user.id).count()
     messages.success(request, "Kitap Sepetten Silindi.")
     return HttpResponseRedirect("/shopcard")

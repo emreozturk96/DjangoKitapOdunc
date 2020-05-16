@@ -9,6 +9,7 @@ from django.shortcuts import render
 from book.models import Category, Book, Images, Comment
 from home.forms import SearchForm, SignUpForm
 from home.models import Setting, ContactForm, ContactFormMessage, Slider
+from order.models import ShopCard
 
 
 def index(request):
@@ -18,6 +19,8 @@ def index(request):
     books = Book.objects.all().order_by('?')[:9]
     bookfirst = Book.objects.first()
     bookslider = Book.objects.all().order_by('id')[1:4]
+    current_user = request.user
+    request.session['card_items'] = ShopCard.objects.filter(user_id=current_user.id).count()
     context = {'settings': settings, 'bookfirst': bookfirst, 'sliderfirst': sliderfirst, "category": category,
                "books": books, "bookslider": bookslider}
     return render(request, 'index.html', context)
