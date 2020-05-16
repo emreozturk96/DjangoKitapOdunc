@@ -4,8 +4,11 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
+from django.utils.crypto import get_random_string
+
+from book.models import Book
 from home.models import Setting
-from order.models import ShopCardForm, ShopCard
+from order.models import ShopCardForm, ShopCard, Order, OrderBook
 
 
 def index(request):
@@ -50,7 +53,6 @@ def addtocard(request, id):
             messages.success(request, "Başarıyla sepete eklenmiştir.")
         return HttpResponseRedirect(url)
 
-
     messages.warning(request, "Sepete Eklerken hata.")
     return HttpResponseRedirect(url)
 
@@ -72,3 +74,32 @@ def deletefromcard(request, id):
     request.session['card_items'] = ShopCard.objects.filter(user_id=current_user.id).count()
     messages.success(request, "Kitap Sepetten Silindi.")
     return HttpResponseRedirect("/shopcard")
+
+
+@login_required(login_url='/login')
+def orderbook(request):
+    settings = Setting.objects.get(pk=1)
+    current_user = request.user
+    data = Order()
+    data.user_id = current_user.id
+    data.ip = request.META.get('REMOTE_ADDR')
+    ordercode = get_random_string(5).upper()
+    data.code = ordercode
+    data.save()
+
+    schopcard = ShopCard.objects.filter(user_id=current_user.id)
+    for rs in schopcard:
+        detail = OrderBook()
+        detail.order_id = data.id
+        detail.book_id = rs.book_id
+        detail.user_id = current_user.id
+        detail.save()
+
+        book = Book.objects.get(id=rs.book_id)
+        book.amount -= 1
+        book.save()
+
+    ShopCard.objects.filter(user_id=current_user.id).delete()
+    request.session['card_items'] = 0
+    messages.success(request, "Rezervasyon tamamlandi.")
+    return render(request, 'order_completed.html', {'ordercode': ordercode, 'settings': settings, 'user':current_user})

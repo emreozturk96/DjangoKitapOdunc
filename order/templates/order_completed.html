@@ -1,0 +1,30 @@
+{% extends "homebase.html" %}
+
+{% block title %} SHOPCARD {% endblock %}
+{% block keywords %} {{ settings.keywords }} {% endblock %}
+{% block description %} {{ settings.description }} {% endblock %}
+
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ settings.icon.url }}'/> {% endblock %}
+
+
+{% block content %}
+
+    <div id="mainBody">
+        <div class="container">
+
+            <h1>Order Complete</h1>
+            <hr class="soften"/>
+
+            <div class="accordion" id="accordion2">
+                {{ user.first_name }}  {{ user.last_name }}<br/>
+                Order Code : {{ ordercode }}<br/>
+                Kitapları kütüphanemizden teslim alabilirsiniz. Lütfen süresinde geri getiriniz. Aksi halde her kitap için gün başına 3 tl cezai yaptırım vardır.
+            </div>
+        </div>
+    </div>
+    <!-- MainBody End ============================= -->
+
+
+{% endblock %}
+
