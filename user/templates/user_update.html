@@ -25,34 +25,15 @@
                 </div>
 
                 <div class="span8">
-                    <table class="table table-striped">
-                        <tr>
-                            <th > <a href="/user/update"><button>Update Profile</button></a>
-                                <a href="/user/password"><button>Change Password</button></a>
-                            </th>
-                            <td ><img style="width: 200px" src="{{ profile.image.url }}"></td>
-                        </tr>
-                        <tr>
-                            <th class="span3">Name Surname :</th>
-                            <td class="span5">{{ profile.user.first_name }} {{ profile.user.last_name }}</td>
-                        </tr>
-                        <tr>
-                            <th>Phone :</th>
-                            <td>{{ profile.phone }}</td>
-                        </tr>
-                        <tr>
-                            <th>Adres :</th>
-                            <td>{{ profile.address }}</td>
-                        </tr>
-                        <tr>
-                            <th>City :</th>
-                            <td>{{ profile.city }}</td>
-                        </tr>
-                        <tr>
-                            <th>Country :</th>
-                            <td>{{ profile.country }}</td>
-                        </tr>
-                    </table>
+                   <form method="post" enctype="multipart/form-data">
+                       {% csrf_token %}
+                       <fieldset>
+                           {{ user_form.as_p }}
+                           {{ profile_form.as_p }}
+                       </fieldset>
+                        <button type="submit">Update</button>
+                   </form>
+
                 </div>
             </div>
         </div>
