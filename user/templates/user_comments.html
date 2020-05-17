@@ -1,0 +1,61 @@
+{% extends "homebase.html" %}
+
+{% block title %} User Comments{% endblock %}
+{% block keywords %} {{ settings.keywords }} {% endblock %}
+{% block description %} {{ settings.description }} {% endblock %}
+
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ settings.icon.url }}'/> {% endblock %}
+
+{% block content %}
+    <div id="mainBody">
+        <div class="container">
+            <hr class="soften"/>
+            <div class="row">
+                <div class="span4">
+                    <div class="well" style="padding: 8px 0;">
+                        <ul class="nav nav-list">
+                            <li><a href="/user"><i class="icon-user"></i> My Account</a></li>
+                            <li><a href="/user/orders"><i class="icon-shopping-cart"></i> My Orders</a></li>
+                            <li><a href="/user/comments"><i class="icon-pencil"></i> My Comments</a></li>
+                            <li><a href="/user/favorites"><i class="icon-heart"></i> My Favorites</a></li>
+                            <li><a href="/logout"><i class="icon-lock"></i> LOGOUT</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="span8">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>ID</th>
+                            <th>Book</th>
+                            <th>Subject</th>
+                            <th>Comment</th>
+                            <th>Rate</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Delete</th>
+                        </tr>
+                        {% for rs in comments %}
+                        <tr>
+                            <td><a href="/book/{{ rs.book_id }}/{{ rs.book.slug }}"><img src="{{ rs.book.image.url}}" ></a></td>
+                            <td>{{ rs.book.title }}</td>
+                            <td>{{ rs.subject }}</td>
+                            <td>{{ rs.comment }}</td>
+                            <td>{{ rs.rate }}</td>
+                            <td>{{ rs.update_at |date:"d.m.Y" }}</td>
+                            <td>{{ rs.status }}</td>
+                            <td><a class="btn-danger" href="/user/deletecomment/{{ rs.id }}" onclick="return confirm('Delete! Are You Sure?')">Delete</a></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+    <!-- MainBody End ============================= -->
+
+{% endblock %}
+
