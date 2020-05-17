@@ -1,6 +1,6 @@
 {% extends "homebase.html" %}
 
-{% block title %} User Panel {% endblock %}
+{% block title %} User Orders{% endblock %}
 {% block keywords %} {{ settings.keywords }} {% endblock %}
 {% block description %} {{ settings.description }} {% endblock %}
 
@@ -25,15 +25,26 @@
                 </div>
 
                 <div class="span8">
-                   <form method="post" enctype="multipart/form-data">
-                       {% csrf_token %}
-                       <fieldset>
-                           {{ user_form.as_p }}
-                           {{ profile_form.as_p }}
-                       </fieldset>
-                        <button type="submit">Update</button>
-                   </form>
-
+                    <table class="table table-striped">
+                        <tr>
+                            <th>ID : </th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Detail</th>
+                        </tr>
+                        {% for rs in orders %}
+                        <tr>
+                            <td>{{ rs.id }}</td>
+                            <td>{{ user.first_name }}</td>
+                            <td>{{ user.last_name }}</td>
+                            <td>{{ rs.update_at |date:"d.m.Y" }}</td>
+                            <td>{{ rs.status }}</td>
+                            <td><a class="btn-info" href="/user/orderdetail/{{ rs.id }}">Detay</a></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
                 </div>
             </div>
         </div>

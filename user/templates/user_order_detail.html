@@ -1,6 +1,6 @@
 {% extends "homebase.html" %}
 
-{% block title %} User Panel {% endblock %}
+{% block title %} Order Detail{% endblock %}
 {% block keywords %} {{ settings.keywords }} {% endblock %}
 {% block description %} {{ settings.description }} {% endblock %}
 
@@ -25,15 +25,26 @@
                 </div>
 
                 <div class="span8">
-                   <form method="post" enctype="multipart/form-data">
-                       {% csrf_token %}
-                       <fieldset>
-                           {{ user_form.as_p }}
-                           {{ profile_form.as_p }}
-                       </fieldset>
-                        <button type="submit">Update</button>
-                   </form>
-
+                    <table class="table table-striped">
+                        <tr>
+                            <th> </th>
+                            <th>Book Name</th>
+                            <th>Author</th>
+                            <th>Publisher</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                        {% for rs in orderitems %}
+                        <tr>
+                            <td><a href="/book/{{ rs.book_id }}/{{ rs.book.slug }}"><img src="{{ rs.book.image.url }}" style="height: 60px"></a></td>
+                            <td><a href="/book/{{ rs.book_id }}/{{ rs.book.slug }}">{{ rs.book.title }}</a></td>
+                            <td>{{ rs.book.author }}</td>
+                            <td>{{ rs.book.publisher }}</td>
+                            <td>{{ rs.update_at |date:"d.m.Y" }}</td>
+                            <td>{{ rs.status }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
                 </div>
             </div>
         </div>
