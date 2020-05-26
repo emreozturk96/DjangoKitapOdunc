@@ -74,13 +74,17 @@
                                 {% csrf_token %}
                                 <div class="control-group">
                                     <label class="control-label"><span>{{ book.amount }} books in stock</span></label>
-                                    <div>
-                                        <label class="control-label"> Kitap maximum 20 günlük ödünç alınabilir:</label>
-                                        <input type="number" name="day" id="id_day" value="1" min="1" max="20"
-                                               style="width: 35px">
-                                        <button type="submit" class="btn btn-large btn-primary pull-right"> Add to cart
-                                            <i class=" icon-shopping-cart"></i></button>
-                                    </div>
+                                    <label class="control-label"> Kitap maximum 20 günlük ödünç alınabilir:</label>
+                                </div>
+                                <div class="control-group">
+                                    <button type="submit" class="btn btn-large btn-primary pull-right"> Add to cart<i
+                                            class=" icon-shopping-cart"></i></button>
+                                    <label for="end_date">start_date: </label>
+                                    <input type="date" id="start_date" name="start_date"
+                                           value="{{ start | date:"Y-m-d" }}">
+                                    <label for="end_date">end_date:</label>
+                                    <input type="date" id="end_date" name="end_date">
+
                                 </div>
                             </form>
 

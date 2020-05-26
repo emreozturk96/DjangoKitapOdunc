@@ -5,7 +5,7 @@ from order.models import ShopCard, Order, OrderBook
 
 
 class ShopCardAdmin(admin.ModelAdmin):
-    list_display = ('user', 'book', 'day')
+    list_display = ('user', 'book', 'start_date', 'end_date')
 
 
 class OrderProductline(admin.TabularInline):

@@ -31,7 +31,8 @@
                             <th>Book Name</th>
                             <th>Author</th>
                             <th>Publisher</th>
-                            <th>Date</th>
+                            <th>Teslim </th>
+                            <th>İade </th>
                             <th>Status</th>
                         </tr>
                         {% for rs in orderitems %}
@@ -40,7 +41,8 @@
                             <td><a href="/book/{{ rs.book_id }}/{{ rs.book.slug }}">{{ rs.book.title }}</a></td>
                             <td>{{ rs.book.author }}</td>
                             <td>{{ rs.book.publisher }}</td>
-                            <td>{{ rs.update_at |date:"d.m.Y" }}</td>
+                            <td>{{ rs.start_date |date:"d.m.Y" }}</td>
+                            <td>{{ rs.end_date |date:"d.m.Y" }}</td>
                             <td>{{ rs.status }}</td>
                         </tr>
                         {% endfor %}

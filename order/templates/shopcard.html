@@ -5,7 +5,16 @@
 {% block description %} {{ settings.description }} {% endblock %}
 
 {% block head %}
-    <link rel='shortcut icon' type='image/x-icon' href='{{ settings.icon.url }}'/> {% endblock %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ settings.icon.url }}'/>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.datepicker').datepicker();
+        });
+    </script>
+{% endblock %}
 
 
 {% block content %}
@@ -24,6 +33,9 @@
                         <th>Book</th>
                         <th>Description</th>
                         <th>Gün/Update</th>
+                        <th>
+
+                        </th>
 
                     </tr>
                     </thead>
@@ -33,22 +45,29 @@
                             <td><img width="60" src="{{ rs.book.image.url }}" alt=""/></td>
                             <td>{{ rs.book.title }}<br/>{{ rs.book.author }}</td>
                             <td>
-                                <div class="input-append">
-                                    <input class="span1" style="max-width:34px" value="{{ rs.day }}"
-                                           id="appendedInputButtons" size="16" type="text">
-                                    <button class="btn" type="button"><i class="icon-minus"></i></button>
-                                    <button class="btn" type="button"><i class="icon-plus"></i></button>
-                                    <a href="/order/deletefromcard/{{ rs.id }}" onclick="return confirm('Sepetten kaldırmak istediğinize emin misiniz ?')">
-                                        <button class="btn btn-danger" type="button"><i
-                                                class="icon-remove icon-white"></i></button>
-                                    </a>
-                                </div>
+                                <form action="/order/updatedatefromcard/{{ rs.id }}" method="POST">
+                                    {% csrf_token %}
+                                    <label for="end_date">start_date: </label>
+                                    <input type="date" id="start_date" name="start_date"
+                                           value="{{ rs.start_date | date:"Y-m-d" }}">
+                                    <label for="end_date">end_date:</label>
+                                    <input type="date" id="end_date" name="end_date"
+                                           value="{{ rs.end_date | date:"Y-m-d" }}" >
+
+                                    <button class="btn btn-info pull-right" type="submit">Tarihi Güncelle</button>
+                                </form>
+                            </td>
+                            <td>
+                                <a href="/order/deletefromcard/{{ rs.id }}" onclick="return confirm('Sepetten kaldırmak istediğinize emin misiniz ?')">
+                                    <button class="btn btn-danger" type="button"><i class="icon-remove icon-white"></i></button></a>
                             </td>
                         </tr>
                     {% endfor %}
 
                     <tr>
-                        <td colspan="6" style="text-align:right"><a href="/order/orderbook" ><button class="btn" type="button">Place Order</button></a> </td>
+                        <td colspan="6" style="text-align:right"><a href="/order/orderbook">
+                            <button class="btn" type="button">Place Order</button>
+                        </a></td>
                     </tr>
                     </tbody>
                 </table>

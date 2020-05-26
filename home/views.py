@@ -1,3 +1,4 @@
+import datetime
 import json
 
 from django.contrib import messages
@@ -72,7 +73,8 @@ def book_detail(request, id, slug):
     book = Book.objects.get(pk=id)
     images = Images.objects.filter(book_id=id)
     comments = Comment.objects.filter(book_id=id, status='True')
-    context = {"category": category, "book": book, "images": images, "comments": comments}
+    start = datetime.datetime.now()
+    context = {"category": category, "book": book, "images": images, "comments": comments, "start": start}
     return render(request, 'book_detail.html', context)
 
 

@@ -10,16 +10,11 @@ from book.models import Book
 class ShopCard(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     book = models.ForeignKey(Book, on_delete=models.SET_NULL, null=True)
-    day = models.IntegerField()
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
 
     def __str__(self):
         return self.book.title
-
-
-class ShopCardForm(ModelForm):
-    class Meta:
-        model = ShopCard
-        fields = ['day']
 
 
 class Order(models.Model):
@@ -56,6 +51,8 @@ class OrderBook(models.Model):
     status = models.CharField(choices=STATUS, default='New', max_length=20)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
 
     def __str__(self):
         return self.book.title
