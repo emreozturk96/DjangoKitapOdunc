@@ -1,0 +1,39 @@
+{% extends "homebase.html" %}
+
+{% block title %} SSS {% endblock %}
+{% block keywords %} {{ settings.keywords }} {% endblock %}
+{% block description %} {{ settings.description }} {% endblock %}
+
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ settings.icon.url }}'/> {% endblock %}
+
+
+{% block content %}
+
+    <div id="mainBody">
+        <div class="container">
+            <h1>Sıkça Sorulan Sorular</h1>
+            <hr class="soften"/>
+            <div class="accordion" id="accordion2">
+                {% for rs in faqs %}
+                <div class="accordion-group">
+                    <div class="accordion-heading">
+                        <h4><a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapse{{ rs.ordernumber }}">
+                            {{ rs.question }}
+                        </a></h4>
+                    </div>
+                    <div id="collapse{{ rs.ordernumber }}" class="accordion-body collapse">
+                        <div class="accordion-inner">
+                            {{ rs.answer }}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- MainBody End ============================= -->
+
+
+{% endblock %}
+

@@ -9,7 +9,7 @@ from django.shortcuts import render
 # Create your views here.
 from book.models import Category, Book, Images, Comment
 from home.forms import SearchForm, SignUpForm
-from home.models import Setting, ContactForm, ContactFormMessage, Slider
+from home.models import Setting, ContactForm, ContactFormMessage, Slider, FAQ
 from order.models import ShopCard
 
 
@@ -70,11 +70,13 @@ def category_books(request, id, slug):
 
 def book_detail(request, id, slug):
     category = Category.objects.all()
+    bookfirst = Book.objects.first()
     book = Book.objects.get(pk=id)
     images = Images.objects.filter(book_id=id)
     comments = Comment.objects.filter(book_id=id, status='True')
     start = datetime.datetime.now()
-    context = {"category": category, "book": book, "images": images, "comments": comments, "start": start}
+    context = {"category": category, "book": book, "images": images, "comments": comments, "start": start,
+               "bookfirst": bookfirst}
     return render(request, 'book_detail.html', context)
 
 
@@ -149,3 +151,10 @@ def signup_view(request):
     category = Category.objects.all()
     context = {'settings': settings, "category": category, "form": form}
     return render(request, 'signup.html', context)
+
+
+def faq(request):
+    settings = Setting.objects.get(pk=1)
+    faqs = FAQ.objects.filter(status='True').order_by('ordernumber')
+    context = {'settings': settings, 'faqs': faqs}
+    return render(request, 'faq.html', context)
